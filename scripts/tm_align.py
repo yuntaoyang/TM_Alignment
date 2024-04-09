@@ -43,14 +43,17 @@ def get_tm_score(out_dir):
 def main():
     parser = get_parser()
     args = parser.parse_args()
-    # Run TM-align
-    command = build_script(args.pdb_dir_1, args.pdb_dir_2)
-    process = subprocess.run(command, capture_output=True, text=True)
-    # # Format the output
-    format_output(args.out_dir)
-    # Get TM-score from the PDB file
-    tm_score = get_tm_score(args.out_dir)
-    print(tm_score)
+    try:
+        # Run TM-align
+        command = build_script(args.pdb_dir_1, args.pdb_dir_2)
+        process = subprocess.run(command, capture_output=True, text=True)
+        # Format the output
+        format_output(args.out_dir)
+        # Get TM-score from the PDB file
+        tm_score = get_tm_score(args.out_dir)
+        print(tm_score)
+    except:
+        print(process.stdout)
 
 if __name__ == "__main__":
     main()
