@@ -44,7 +44,7 @@ def main():
     parser = get_parser()
     args = parser.parse_args()
     try:
-        # Run TM-align
+    # Run TM-align
         command = build_script(args.pdb_dir_1, args.pdb_dir_2)
         process = subprocess.run(command, capture_output=True, text=True)
         # Format the output
@@ -53,6 +53,7 @@ def main():
         tm_score = get_tm_score(args.out_dir)
         print(tm_score)
     except:
+        print(process.stderr)
         print(process.stdout)
 
 if __name__ == "__main__":
